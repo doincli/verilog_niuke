@@ -23,6 +23,7 @@ wire s32s2_start;
 always@(posedge clk or negedge rst_n)begin
     if(!rst_n)begin
         state_c <= IDLE;
+        state_n <= IDLE;
     end
     else begin
         state_c <= state_n;
@@ -42,7 +43,7 @@ always@(*)begin
         end
         S1:begin
             if(s12s3_start)begin
-                state_n = S2;
+                state_n = S3;
             end
             else begin
                 state_n = state_c;
@@ -77,16 +78,16 @@ assign s22idl_start  = state_c==S2    &&  C == 0;
 assign s32s2_start  = state_c==S3    &&  C == 1;
 
 //第四段：同步时序always模块，格式化描述寄存器输出（可有多个输出）
-//assign Y = (state_c==S2) || (state_c==S3 && C == 1);
-always  @(posedge clk or negedge rst_n)begin
-    if(rst_n==1'b0)begin
-        Y <= 0;
-    end
-    else if((state_c==S2) || (state_c==S3 && C == 1)) begin
-        Y <= 1;
-    end
-    else begin
-        Y <= 0;
-    end
-end
+assign Y = (state_c==S3) || (state_c==S2 && C == 1);
+// always  @(posedge clk or negedge rst_n)begin
+//     if(rst_n==1'b0)begin
+//         Y <= 0;
+//     end
+//     else if((state_c==S2) || (state_c==S3 && C == 1)) begin
+//         Y <= 1;
+//     end
+//     else begin
+//         Y <= 0;
+//     end
+// end
 endmodule

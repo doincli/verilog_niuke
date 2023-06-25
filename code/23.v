@@ -24,6 +24,6 @@ always  @(posedge clk or negedge rst_n)begin
 end
 
 
-assign data = romreg[addr];
+assign data = rom[addr];
 
 endmodule
