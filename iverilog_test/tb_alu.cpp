@@ -4,7 +4,7 @@
 #include <verilated_vcd_c.h>	// write waveforms to a VCD(value change dump) file
 #include "Valu.h"							// contains the  top class of your ALU module
 #include "Valu___024root.h"		// 
-
+#include "Valu__Syms.h"
 
 #define MAX_SIM_TIME 1000000
 vluint64_t sim_time = 0;
@@ -13,7 +13,7 @@ int main(int argc, char** argv, char** env){
 	Valu *dut = new Valu;
 
 	Verilated:: traceEverOn(true);
-	VerilatedVcdC *m_trace = new VerilatedVcdC;
+	VerilatedVcdC *m_trace = new VerilatedVcdC;                            
 	dut->trace(m_trace,5);	// param 5 limits the depth of the trace to 5 levels down the dut
 	m_trace -> open("waveform.vcd");
 	
