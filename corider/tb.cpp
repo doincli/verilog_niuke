@@ -6,7 +6,7 @@
 #include "Vcordic_vec___024root.h"		// 
 
 
-#define MAX_SIM_TIME 10000
+#define MAX_SIM_TIME 300000
 vluint64_t sim_time = 0;
 
 int main(int argc, char** argv, char** env){
@@ -15,16 +15,21 @@ int main(int argc, char** argv, char** env){
 	VerilatedVcdC *m_trace = new VerilatedVcdC;
 	dut->trace(m_trace,10);	// param 5 limits the depth of the trace to 5 levels down the dut
 	m_trace -> open("waveform.vcd");
-	dut->x = 286392320;
-	dut->y = 286392320;
-	//dut->phase = 0;
+	dut->x = 0x11120000;
+	dut->y = 0x11120000;
+	dut->phase = 0;
 	while(sim_time < MAX_SIM_TIME){
+		// if (sim_time < 3)
+		// {
+		// 	dut->rst_n = 0;
+		// }else
+		// {
+		// 	dut->rst_n = 1;
+		// }
 		if (sim_time%5 == 0)
 		{
 			dut -> clk ^= 1;
 		}
-		
-
 		dut -> eval();			//evaluates all the signals in our ALU module
 		m_trace -> dump(sim_time);	// writes all the traced signal values into waveform dump file
 		sim_time++;

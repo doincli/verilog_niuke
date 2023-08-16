@@ -65,7 +65,7 @@ end
  genvar i;
 
    generate
-   for (i=0; i < (STG); i=i+1)
+   for (i=0; i < (STG)-1; i=i+1)
    begin: XYZ
       
       wire signed  [31 :0] X_shr, Y_shr; 
@@ -100,7 +100,7 @@ end
         15'd12: Z[i+1] <= Z_sign ? Z[i] + `rot12 : Z[i] - `rot12;
         15'd13: Z[i+1] <= Z_sign ? Z[i] + `rot13 : Z[i] - `rot13;
         15'd14: Z[i+1] <= Z_sign ? Z[i] + `rot14 : Z[i] - `rot14;
-        15'd15: Z[i+1] <= Z_sign ? Z[i] + `rot15 : Z[i] - `rot15;
+        // 15'd15: Z[i+1] <= Z_sign ? Z[i] + `rot15 : Z[i] - `rot15;
       
 
         endcase
