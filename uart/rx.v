@@ -3,8 +3,8 @@
  function : receive a frame data
 **************************************************************************** */
 module uart_rx#(
-      parameter CLK_FRE = 80,
-	  parameter BAUD_RATE = 115200
+      parameter CLK_FRE = 50,
+	  parameter BAUD_RATE = 9600
 )
 
 (
