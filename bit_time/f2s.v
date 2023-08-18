@@ -12,6 +12,7 @@ module delay_clap(
   else    sig2_r <= {sig2_r[1:0], sig1} ; //缓存
  end
  assign sig2 = sig2_r[1] && !sig2_r[2] ; //上升沿检测
-
+wire out;
+assign out = sig2_r[2];
 
 endmodule
