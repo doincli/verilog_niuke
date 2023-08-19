@@ -22,12 +22,12 @@ parameter CYCLE    = 20;
 parameter RST_TIME = 3 ;
                     
 //待测试的模块例化
-delay_clap u1(
-    .clk1(clk2), //异步慢时钟
-    .sig1(sig1), //异步信号
-    .rstn(rst_n), //复位信号
-    .clk2(clk1), //目的快时钟域市政
-    .sig2(sig2)
+pulse_syn u1(
+    .clk1(clk1), //异步慢时钟
+    .in(sig1), //异步信号
+    .rst_n(rst_n), //复位信号
+    .clk2(clk2), //目的快时钟域市政
+    .out(sig2)
     ); 
                     
                     
@@ -61,7 +61,7 @@ wire add_cnt;
 wire end_cnt;
 reg [2:0] cnt;
                     
-always @(posedge clk2 or negedge rst_n)begin
+always @(posedge clk1 or negedge rst_n)begin
     if(!rst_n)begin
         cnt <= 0;
     end
@@ -76,15 +76,15 @@ end
 assign add_cnt = 1;  
 assign end_cnt = add_cnt && cnt== 5; 
 
-always  @(posedge clk2 or negedge rst_n)begin
+always  @(posedge clk1 or negedge rst_n)begin
     if(rst_n==1'b0)begin
         sig1 <= 0;
     end
     else if (cnt == 4) begin
-        sig1 <= 0;
+        sig1 <= 1;
     end
     else begin
-        sig1 <= 1;
+        sig1 <= 0;
     end
 end
 

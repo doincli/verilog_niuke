@@ -64,3 +64,19 @@ module handshake_sync (
  assign read_sync_pulse = req_in2 & ~req_in2_dly1;
  
  endmodule
+
+/*
+ always@(posedge clk_in or negedge rst_n) begin
+
+if(rst_n==1'b0) d_reg<=1'b0;
+
+else if (d_in==1'b1) d_reg<=1'b1;
+
+else if (d_ack==1'b1) d_reg<=1'b0;
+
+end
+
+问题2：
+
+assign dout=d_reg_sync && d_reg_sync_d;
+*/
